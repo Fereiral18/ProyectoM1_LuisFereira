@@ -1,56 +1,72 @@
-*, ::after, ::before{
-box-sizing: border-box;
-padding: 0;
-margin: 0;
-}
-/*Header de la app Paletix*/
-header{
-border: 1px black solid;
-width: 100%;
-height: 10vh;
+:root {
+    --primary-bg: #f4f4f9;
+    --text-color: #333;
+    --accent-color: #4a90e2;
 }
 
-.navBar {
-    width: 100%;
-    height: 100%;
+body {
+    font-family: Arial, sans-serif;
+    background-color: var(--primary-bg);
+    color: var(--text-color);
+    margin: 0;
     display: flex;
-    justify-content: space-between;
+    flex-direction: column;
     align-items: center;
 }
- .box-option{
-width: 50%;
-margin-left: 20px;
- }
- .title{display: flex;
-    justify-content: center;
-    padding: 8px;
-    width: 20%;
- }
- .list-option{
-    display: flex;
-    justify-content: space-evenly;
-    align-content: center;
-    list-style-type: none;
- }
- li > button {
-    background-color: white;
-    border: 0;
- }
-/* Cuerpo de la pagina, funcionalidad principal */
-main{
-border: 1px black solid;
-height: 80vh;
-}
-/*Footer de la app, contacto y sitios webs para contactar a los creadores*/
-footer{
-border: 1px black solid;
-height: 10vh;
-width: 100%;
+
+header {
+    text-align: center;
+    padding: 2rem;
 }
 
-.box-container-info{
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    width: 100%;
-    height: 100%;
+.controls {
+    margin-bottom: 2rem;
+    display: flex;
+    gap: 1rem;
+    align-items: center;
 }
+
+/* Render dinámico mediante Grid [3] */
+.palette-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+    gap: 15px;
+    width: 90%;
+    max-width: 1000px;
+}
+
+.color-card {
+    background: white;
+    padding: 10px;
+    border-radius: 8px;
+    text-align: center;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    transition: transform 0.2s; /* Animación sutil [3] */
+}
+
+.color-card:hover {
+    transform: scale(1.05);
+}
+
+.color-box {
+    height: 150px;
+    border-radius: 4px;
+    margin-bottom: 10px;
+    cursor: pointer;
+}
+
+/* Estilo para accesibilidad: Foco visible [3] */
+button:focus, select:focus {
+    outline: 3px solid var(--accent-color);
+}
+
+#toast {
+    position: fixed;
+    bottom: 20px;
+    background: #333;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 5px;
+}
+
+.hidden { display: none; }

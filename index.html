@@ -1,43 +1,42 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="es">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="/styles/styles.css">
-    <title>Paleta de colores</title>
-  </head>
-  <body>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Colorfly Studio - Generador de Paletas</title>
+    <link rel="stylesheet" href="./styles/styles.css">
+</head>
+<body>
     <header>
-      <nav class="navBar">
-        <div class="title">Paletix</div>
-        <div class="box-option">
-          <ul class="list-option">
-            <li><button>colores</button></li>
-            <li><button>contacto</button></li>
-            <li>
-              <button>acerca de</button>
-            </li>
-          </ul>
-        </div>
-      </nav>
+        <h1>Colorfly Studio</h1>
+        <p>Herramienta intuitiva para flujos creativos de branding [4].</p>
     </header>
+
     <main>
-      <section><div>Paleta de colores</div></section>
-      <section>¿Que es la psicologia del color?</section>
-      <section>¿Que significa el color que elegiste?</section>
+        <nav class="controls">
+            <!-- Selección de tamaño de paleta [5] -->
+            <label for="palette-size">Tamaño de la paleta:</label>
+            <select id="palette-size">
+                <option value="6">6 Colores</option>
+                <option value="8">8 Colores</option>
+                <option value="9">9 Colores</option>
+            </select>
+
+            <!-- Botón principal operativo [3] -->
+            <button id="generate-btn">Generar Paleta</button>
+        </nav>
+
+        <!-- Contenedor dinámico de colores [3] -->
+        <section id="palette-container" class="palette-grid"></section>
     </main>
+
+    <!-- Microfeedback (Toast) [3] -->
+    <div id="toast" class="hidden">¡Código copiado al portapapeles!</div>
+
     <footer>
-      <div class="box-container-info">
-        <div>
-          2026 Paletix - Todos los derechos reservados. Politicas, terminos y
-          condiciones.
-        </div>
-        <div>
-          <div>Github</div>
-          <div>LinkedIn</div>
-        </div>
-      </div>
+        <p>&copy; 2025 Colorfly Studio - Proyecto Integrador Frontend Junior [1]</p>
     </footer>
-  </body>
-  <script src="/scripts/scripts.js"></script>
+
+    <script src="./scripts/scripts.js"></script>
+</body>
 </html>
