@@ -18,7 +18,9 @@ header {
     text-align: center;
     padding: 2rem;
 }
-
+main{
+    width: 90%;
+}
 .controls {
     margin-bottom: 2rem;
     display: flex;
@@ -26,18 +28,16 @@ header {
     align-items: center;
 }
 
-/* Render dinámico mediante Grid [3] */
+/* Render dinámico mediante Grid */
 .palette-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
-    gap: 15px;
     width: 90%;
-    max-width: 1000px;
+    max-width: 90%;
 }
 
 .color-card {
     background: white;
-    padding: 10px;
     border-radius: 8px;
     text-align: center;
     box-shadow: 0 4px 6px rgba(0,0,0,0.1);
@@ -45,12 +45,12 @@ header {
 }
 
 .color-card:hover {
-    transform: scale(1.05);
+    transform: scale(1.1);
 }
 
 .color-box {
     height: 150px;
-    border-radius: 4px;
+   
     margin-bottom: 10px;
     cursor: pointer;
 }

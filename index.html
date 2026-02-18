@@ -1,42 +1,49 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Colorfly Studio - Generador de Paletas</title>
-    <link rel="stylesheet" href="./styles/styles.css">
-</head>
-<body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Colorfly Studio</title>
+    <link rel="stylesheet" href="./styles/styles.css" />
+  </head>
+  <body>
     <header>
-        <h1>Colorfly Studio</h1>
-        <p>Herramienta intuitiva para flujos creativos de branding [4].</p>
+      <h1>Colorfly Studio</h1>
+      <p>Herramienta intuitiva para flujos creativos de branding [4].</p>
     </header>
 
     <main>
-        <nav class="controls">
-            <!-- Selección de tamaño de paleta [5] -->
-            <label for="palette-size">Tamaño de la paleta:</label>
-            <select id="palette-size">
-                <option value="6">6 Colores</option>
-                <option value="8">8 Colores</option>
-                <option value="9">9 Colores</option>
-            </select>
+      <nav class="controls">
+        <!-- Selección de tamaño de paleta -->
+        <label for="palette-size">Tamaño de la paleta:</label>
+        <select id="palette-size">
+          <option value="6">Selecciona un color..</option>
+          <option value="6">6 Colores</option>
+          <option value="8">8 Colores</option>
+          <option value="9">9 Colores</option>
+        </select>
 
-            <!-- Botón principal operativo [3] -->
-            <button id="generate-btn">Generar Paleta</button>
-        </nav>
+        <!-- Botón principal operativo -->
+        <button id="generate-btn">Generar Paleta</button>
+        <select id="typeColor-btn">
+          <option value="hsl">Hsl</option>
+          <option value="hex">Hex</option>
+        </select>
+      </nav>
 
-        <!-- Contenedor dinámico de colores [3] -->
-        <section id="palette-container" class="palette-grid"></section>
+      <!-- Contenedor dinámico de colores  -->
+      <section id="palette-container" class="palette-grid"></section>
     </main>
 
-    <!-- Microfeedback (Toast) [3] -->
+    <!-- Alert codigo al portapapeles -->
     <div id="toast" class="hidden">¡Código copiado al portapapeles!</div>
 
     <footer>
-        <p>&copy; 2025 Colorfly Studio - Proyecto Integrador Frontend Junior [1]</p>
+      <p>
+        &copy; 2025 Colorfly Studio - Proyecto Integrador Frontend Junior [1]
+      </p>
     </footer>
 
     <script src="./scripts/scripts.js"></script>
-</body>
+  </body>
 </html>
