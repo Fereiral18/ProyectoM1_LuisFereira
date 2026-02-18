@@ -12,6 +12,7 @@ body {
     display: flex;
     flex-direction: column;
     align-items: center;
+    background-color: 331, 29%, 51%;
 }
 
 header {
