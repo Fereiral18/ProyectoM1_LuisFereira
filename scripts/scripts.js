@@ -6,7 +6,7 @@ const toast = document.getElementById("toast");
 const typeColor = document.getElementById("typeColor-btn");
 
 // Función para generar color aleatorio HEX
-let sizeValue = ""
+let sizeValue = "";
 function generateRandomHex() {
   const chars = "0123456789ABCDEF";
   let color = "#";
@@ -81,39 +81,15 @@ function rgbToHsl(hsl = hexToRgb()) {
 }
 
 // Render dinámico de la paleta
-
+let currentPalette = [];
 function createPalette() {
   paletteContainer.innerHTML = "";
-  let colorsList = [];
- 
+
   // Obtener el valor del select después de la inicialización
-  sizeValue =  sizeSelect.value
+  sizeValue = sizeSelect.value;
+  const types = typeColor.value;
+
   const size = parseInt(sizeValue);
-
-  colorsList = [];
-  for (let i = 0; i < size; i++) {
-    const hex = generateRandomHex();
-    const hsl = rgbToHsl();
-    const card = document.createElement("div");
-    colorsList.push({ hex, hsl });
-    card.className = "color-card";
-
-    card.innerHTML = `
-        <div class="color-box" style="background-color: ${typeColor.value === "hex" ? hex : `hsl(${hsl.h}, ${hsl.s}%, ${hsl.l}%)`}" title="Click para copiar"></div>
-        <p><strong class="color-value">${typeColor.value === "hex" ? hex : `hsl(${hsl.h}, ${hsl.s}%, ${hsl.l}%)`}</strong></p>
-        `;
-
-    // Evento para copiar al portapapeles y mostrar feedback
-    card.querySelector(".color-box").addEventListener("click", function () {
-      const colorToCopy =
-        typeColor.value === "hex" ? hex : `hsl(${hsl.h}, ${hsl.s}%, ${hsl.l}%)`;
-      navigator.clipboard.writeText(colorToCopy);
-      showToast();
-    });
-
-    paletteContainer.appendChild(card);
-  }
-  console.log("tamaño de la paleta: ", sizeValue);
   // Validación simple y directa (sin función externa)
   if (sizeValue == "0") {
     // Mostrar mensaje de error
@@ -123,15 +99,100 @@ function createPalette() {
     sizeSelect.style.backgroundColor = "#fff8f8";
 
     return; // Esto detiene la ejecución de createPalette
-  }else{
+  } else {
     mensajeError.style.display = "none";
     sizeSelect.style.borderColor = "";
     sizeSelect.style.backgroundColor = "";
- 
   }
-  
-  
 
+  currentPalette = []; // Reiniciar la paleta
+  console.log("Generando NUEVA paleta de colores...");
+
+  // Generar 9 colores nuevos (el máximo posible)
+  for (let i = 0; i < 9; i++) {
+    const hex = generateRandomHex();
+    const hsl = rgbToHsl();
+    currentPalette.push({ hex, hsl });
+  }
+  renderPalette(size);
+}
+let allColorCards = [];
+function renderPalette(size) {
+  // Limpiar el contenedor
+  paletteContainer.innerHTML = "";
+  if (allColorCards.length === 0) {
+     if (!currentPalette || currentPalette.length === 0) {
+      console.error("No hay colores en currentPalette");
+      return;
+    }
+    // Renderizar solo los primeros 'size' elementos de currentPalette
+    for (let i = 0; i < size; i++) {
+      const color = currentPalette[i];
+      const card = document.createElement("div");
+      card.className = "color-card";
+      card.className = "color-card";
+      card.dataset.index = i; // Guardar el índice para referencia
+
+      // Solo mostrar las que están dentro del size inicial
+      card.style.display = i < size ? "block" : "none";
+
+      card.innerHTML = `
+        <div class="color-box" style="background-color: ${typeColor.value === "hex" ? color.hex : `hsl(${color.hsl.h}, ${color.hsl.s}%, ${color.hsl.l}%)`}" title="Click para copiar"></div>
+        <p><strong class="color-value">${typeColor.value === "hex" ? color.hex : `hsl(${color.hsl.h}, ${color.hsl.s}%, ${color.hsl.l}%)`}</strong></p>
+    `;
+
+      // Evento para copiar al portapapeles
+      card.querySelector(".color-box").addEventListener("click", function () {
+        const colorToCopy =
+          typeColor.value === "hex"
+            ? color.hex
+            : `hsl(${color.hsl.h}, ${color.hsl.s}%, ${color.hsl.l}%)`;
+        navigator.clipboard.writeText(colorToCopy);
+        showToast();
+      });
+
+      paletteContainer.appendChild(card);
+    }
+  } else {
+    // Si ya existen tarjetas, solo cambiar su visibilidad según el nuevo size
+    allColorCards.forEach((card, index) => {
+      if (index < size) {
+        card.style.display = "block"; // Mostrar
+      } else {
+        card.style.display = "none"; // Ocultar
+      }
+    });
+  }
+}
+// Función para cambiar el tamaño desde el select
+function updatePaletteSize() {
+  const newSize = parseInt(sizeSelect.value);
+
+  // Validar que no sea la opción por defecto
+  if (newSize === 0) {
+    mensajeError.textContent = "Debes seleccionar una cantidad de colores";
+    mensajeError.style.display = "block";
+    sizeSelect.style.borderColor = "red";
+    sizeSelect.style.backgroundColor = "#fff8f8";
+    return;
+  }
+
+  mensajeError.style.display = "none";
+  sizeSelect.style.borderColor = "";
+  sizeSelect.style.backgroundColor = "";
+
+  // Si ya hay tarjetas creadas, solo cambiar su visibilidad
+  if (allColorCards.length > 0) {
+    allColorCards.forEach((card, index) => {
+      card.style.display = index < newSize ? "block" : "none";
+    });
+    console.log(
+      `Tamaño actualizado a ${newSize} tarjetas visibles (sin re-renderizar)`,
+    );
+  } else {
+    // Si no hay tarjetas, llamar a renderPalette
+    renderPalette(newSize);
+  }
 }
 
 function showToast() {
@@ -146,8 +207,7 @@ function updateColorDisplay() {
   cards.forEach((card, index) => {
     const colorBox = card.querySelector(".color-box");
     const colorValueElement = card.querySelector(".color-value");
-    const color = colorsList[index];
-
+    const color = currentPalette[index];
     if (typeColor.value === "hex") {
       colorValueElement.textContent = color.hex;
       // El color de fondo no cambia, texto hexadecimal
@@ -161,6 +221,7 @@ typeColor.addEventListener("change", updateColorDisplay);
 ("");
 // Boton para generar la paleta de colores
 generateBtn.addEventListener("click", createPalette);
+sizeSelect.addEventListener("change", updatePaletteSize);
 const mensajeBienvenida = document.createElement("div");
 mensajeBienvenida.id = "mensaje-bienvenida";
 mensajeBienvenida.textContent = "¡Bienvenido al generador de paletas Colorfly!";
@@ -171,4 +232,3 @@ setTimeout(() => {
   mensajeBienvenida.remove();
   document.getElementById("contenido-principal").style.display = "block";
 }, 2000);
-
