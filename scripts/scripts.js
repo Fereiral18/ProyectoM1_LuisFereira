@@ -1,9 +1,10 @@
 const paletteContainer = document.getElementById("palette-container");
 const generateBtn = document.getElementById("generate-btn");
 const sizeSelect = document.getElementById("palette-size");
-const mensajeError = document.getElementById('mensaje-error');
+const mensajeError = document.getElementById("mensaje-error");
 const toast = document.getElementById("toast");
 const typeColor = document.getElementById("typeColor-btn");
+
 // Función para generar color aleatorio HEX
 
 function generateRandomHex() {
@@ -17,34 +18,40 @@ function generateRandomHex() {
 }
 
 //Funcion para realizar la transformacion de HEX a RGB
-  function hexToRgb(hex = generateRandomHex()) {
+function hexToRgb(hex = generateRandomHex()) {
   // Eliminar '#' si está presente
-  hex = hex.replace(/^#/, '');
+  hex = hex.replace(/^#/, "");
 
   // Manejar formatos de 3 dígitos (ej: "03F") convirtiéndolos a 6 ("0033FF")
   if (hex.length === 3) {
-    hex = hex.split('').map(char => char + char).join('');
+    hex = hex
+      .split("")
+      .map((char) => char + char)
+      .join("");
   }
 
   // Convertir los pares a decimal
   const r = parseInt(hex.substring(0, 2), 16);
   const g = parseInt(hex.substring(2, 4), 16);
   const b = parseInt(hex.substring(4, 6), 16);
-  return {r, g, b}
+  return { r, g, b };
 }
 
 // Funcion para realizar la transformacion de RGB a HSL
-function rgbToHsl(hsl= hexToRgb()) {
+function rgbToHsl(hsl = hexToRgb()) {
   // 1. Normalizar valores RGB (0-255 a 0-1)
- let r = hsl.r
- r /= 255
- let g = hsl.g
- g /= 255
- let b = hsl.b 
- b /= 255
- console.log(r,g,b)
-  const max = Math.max(r, g, b), min = Math.min(r, g, b);
-  let h, s, l = (max + min) / 2;
+  let r = hsl.r;
+  r /= 255;
+  let g = hsl.g;
+  g /= 255;
+  let b = hsl.b;
+  b /= 255;
+  console.log(r, g, b);
+  const max = Math.max(r, g, b),
+    min = Math.min(r, g, b);
+  let h,
+    s,
+    l = (max + min) / 2;
 
   // 2. Calcular Saturación y Matiz
   if (max === min) {
@@ -53,9 +60,15 @@ function rgbToHsl(hsl= hexToRgb()) {
     const d = max - min;
     s = l > 0.5 ? d / (2 - max - min) : d / (max + min);
     switch (max) {
-      case r: h = (g - b) / d + (g < b ? 6 : 0); break;
-      case g: h = (b - r) / d + 2; break;
-      case b: h = (r - g) / d + 4; break;
+      case r:
+        h = (g - b) / d + (g < b ? 6 : 0);
+        break;
+      case g:
+        h = (b - r) / d + 2;
+        break;
+      case b:
+        h = (r - g) / d + 4;
+        break;
     }
     h /= 6;
   }
@@ -64,95 +77,94 @@ function rgbToHsl(hsl= hexToRgb()) {
   return {
     h: Math.round(h * 360),
     s: Math.round(s * 100),
-    l: Math.round(l * 100)
+    l: Math.round(l * 100),
   };
 }
 
-
 // Render dinámico de la paleta
 
-let colorsList = []
+let colorsList = [];
 function createPalette() {
   paletteContainer.innerHTML = "";
+  const sizeValue = sizeSelect.value;
+  
+  // Validación simple y directa (sin función externa)
+  if (sizeValue == "0" || sizeValue == "") {
+    // Mostrar mensaje de error
+    mensajeError.textContent = "Debes seleccionar una cantidad de colores";
+    mensajeError.style.display = "block";
+    sizeSelect.style.borderColor = "red";
+    sizeSelect.style.backgroundColor = "#fff8f8";
+
+    return; // Esto detiene la ejecución de createPalette
+  }
+  mensajeError.style.display = "none";
+  sizeSelect.style.borderColor = "";
+  sizeSelect.style.backgroundColor = "";
   const size = parseInt(sizeSelect.value);
-  colorsList = []
+  colorsList = [];
   for (let i = 0; i < size; i++) {
-    
-       const hex = generateRandomHex();
-       const hsl = rgbToHsl()
-       const card = document.createElement('div');
-       colorsList.push({hex, hsl})
-        card.className = 'color-card';
-        
-        card.innerHTML = `
+    const hex = generateRandomHex();
+    const hsl = rgbToHsl();
+    const card = document.createElement("div");
+    colorsList.push({ hex, hsl });
+    card.className = "color-card";
+
+    card.innerHTML = `
         <div class="color-box" style="background-color: ${typeColor.value === "hex" ? hex : `hsl(${hsl.h}, ${hsl.s}%, ${hsl.l}%)`}" title="Click para copiar"></div>
-        <p><strong class="color-value">${typeColor.value === "hex" ? hex :`hsl(${hsl.h}, ${hsl.s}%, ${hsl.l}%)`}</strong></p>
+        <p><strong class="color-value">${typeColor.value === "hex" ? hex : `hsl(${hsl.h}, ${hsl.s}%, ${hsl.l}%)`}</strong></p>
         `;
-        
-        // Evento para copiar al portapapeles y mostrar feedback 
-        card.querySelector('.color-box').addEventListener('click', function() {
-            const colorToCopy = typeColor.value === 'hex' ? 
-                hex : 
-                `hsl(${hsl.h}, ${hsl.s}%, ${hsl.l}%)`;
-            navigator.clipboard.writeText(colorToCopy);
-            showToast();
-        });
-       
-        paletteContainer.appendChild(card);
-      }
-   
-      console.log("lista de colores:", colorsList)
-    }
-    
+
+    // Evento para copiar al portapapeles y mostrar feedback
+    card.querySelector(".color-box").addEventListener("click", function () {
+      const colorToCopy =
+        typeColor.value === "hex" ? hex : `hsl(${hsl.h}, ${hsl.s}%, ${hsl.l}%)`;
+      navigator.clipboard.writeText(colorToCopy);
+      showToast();
+    });
+
+    paletteContainer.appendChild(card);
+  }
+
+  console.log("lista de colores:", colorsList);
+}
+
 function showToast() {
   toast.classList.remove("hidden");
   setTimeout(() => toast.classList.add("hidden"), 2000);
 }
 
-
-sizeSelect.addEventListener('change', function() {
-    if (sizeSelect.value === "0") {
-        mensajeError.textContent = '❌ Debes seleccionar una cantidad de colores';
-        mensajeError.style.display = 'block';
-      
-    } else {
-        mensajeError.style.display = 'none';
-    
-        console.log('Cantidad seleccionada:', sizeSelect.value);
-    }
-});
 // Función para actualizar la visualización de los colores
 function updateColorDisplay() {
-    const cards = document.querySelectorAll('.color-card');
-    
-    cards.forEach((card, index) => {
-        const colorBox = card.querySelector('.color-box');
-        const colorValueElement = card.querySelector('.color-value');
-        const color = colorsList[index];
-        
-        if (typeColor.value === 'hex') {
-            colorValueElement.textContent = color.hex;
-            // El color de fondo no cambia, solo el texto
-        } else {
-            colorValueElement.textContent = `hsl(${color.hsl.h}, ${color.hsl.s}%, ${color.hsl.l}%)`;
-            // El color de fondo no cambia, solo el texto
-        }
-    });
-}
-typeColor.addEventListener('change', updateColorDisplay);
-console.log(updateColorDisplay())
-""
-// Event Listeners
-generateBtn.addEventListener("click", createPalette);
-    const mensajeBienvenida = document.createElement('div');
-        mensajeBienvenida.id = 'mensaje-bienvenida';
-        mensajeBienvenida.textContent = '¡Bienvenido al generador de paletas Colorfly!';
-        document.body.appendChild(mensajeBienvenida);
+  const cards = document.querySelectorAll(".color-card");
 
-        // Mostrar contenido después de 2 segundos
-        setTimeout(() => {
-            mensajeBienvenida.remove();
-            document.getElementById('contenido-principal').style.display = 'block';
-        }, 2000);
+  cards.forEach((card, index) => {
+    const colorBox = card.querySelector(".color-box");
+    const colorValueElement = card.querySelector(".color-value");
+    const color = colorsList[index];
+
+    if (typeColor.value === "hex") {
+      colorValueElement.textContent = color.hex;
+      // El color de fondo no cambia, texto hexadecimal
+    } else {
+      colorValueElement.textContent = `hsl(${color.hsl.h}, ${color.hsl.s}%, ${color.hsl.l}%)`;
+      // El color de fondo no cambia, texto HSL
+    }
+  });
+}
+typeColor.addEventListener("change", updateColorDisplay);
+("");
+// Boton para generar la paleta de colores
+generateBtn.addEventListener("click", createPalette);
+const mensajeBienvenida = document.createElement("div");
+mensajeBienvenida.id = "mensaje-bienvenida";
+mensajeBienvenida.textContent = "¡Bienvenido al generador de paletas Colorfly!";
+document.body.appendChild(mensajeBienvenida);
+
+// Mostrar contenido después de 2 segundos
+setTimeout(() => {
+  mensajeBienvenida.remove();
+  document.getElementById("contenido-principal").style.display = "block";
+}, 2000);
 // Inicializar paleta al cargar
 createPalette();
