@@ -85,7 +85,7 @@ function createPalette() {
         
         card.innerHTML = `
         <div class="color-box" style="background-color: ${typeColor.value === "hex" ? hex : `hsl(${hsl.h}, ${hsl.s}%, ${hsl.l}%)`}" title="Click para copiar"></div>
-        <p><strong class="color-value">${typeColor.value === "hex" ? hex :`${hsl.h}, ${hsl.s}%, ${hsl.l}%`}</strong></p>
+        <p><strong class="color-value">${typeColor.value === "hex" ? hex :`hsl(${hsl.h}, ${hsl.s}%, ${hsl.l}%)`}</strong></p>
         `;
         
         // Evento para copiar al portapapeles y mostrar feedback 
@@ -121,7 +121,7 @@ function updateColorDisplay() {
             colorValueElement.textContent = color.hex;
             // El color de fondo no cambia, solo el texto
         } else {
-            colorValueElement.textContent = `${color.hsl.h}, ${color.hsl.s}%, ${color.hsl.l}%`;
+            colorValueElement.textContent = `hsl(${color.hsl.h}, ${color.hsl.s}%, ${color.hsl.l}%)`;
             // El color de fondo no cambia, solo el texto
         }
     });
@@ -131,6 +131,15 @@ console.log(updateColorDisplay())
 ""
 // Event Listeners
 generateBtn.addEventListener("click", createPalette);
+    const mensajeBienvenida = document.createElement('div');
+        mensajeBienvenida.id = 'mensaje-bienvenida';
+        mensajeBienvenida.textContent = '¡Bienvenido al generador de paletas Colorfly!';
+        document.body.appendChild(mensajeBienvenida);
 
+        // Mostrar contenido después de 2 segundos
+        setTimeout(() => {
+            mensajeBienvenida.remove();
+            document.getElementById('contenido-principal').style.display = 'block';
+        }, 2000);
 // Inicializar paleta al cargar
 createPalette();

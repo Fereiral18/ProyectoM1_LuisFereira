@@ -7,41 +7,47 @@
     <link rel="stylesheet" href="./styles/styles.css" />
   </head>
   <body>
-    <header>
-      <h1>Colorfly Studio</h1>
-      <p>Herramienta intuitiva para flujos creativos de branding.</p>
-    </header>
+    <div id="contenido-principal" style="display: none">
+      <header>
+        <h1>Colorfly Studio</h1>
+        <p>
+          Crea paletas profesionales en segundos, sin pensar en teoría del
+          color.
+        </p>
+      </header>
 
-    <main>
-      <nav class="controls">
-        <!-- Selección de tamaño de paleta -->
-        <label for="palette-size">Tamaño de la paleta:</label>
-        <select id="palette-size">
-          <option value="6">Selecciona un color..</option>
-          <option value="6">6 Colores</option>
-          <option value="8">8 Colores</option>
-          <option value="9">9 Colores</option>
-        </select>
-        <!-- Botón para cambiar el tipo de color hex o hsl -->
-        <select id="typeColor-btn">
-          <option value="hsl">Hsl</option>
-          <option value="hex">Hex</option>
-        </select>
-        <!-- Botón principal operativo -->
-        <button id="generate-btn">Generar Paleta</button>
-      </nav>
+      <main>
+        <nav class="controls">
+          <!-- Selección de tamaño de paleta -->
+          <label for="palette-size">Tamaño de la paleta:</label>
+          <select id="palette-size">
+            <option value="6">Selecciona un color..</option>
+            <option value="6">6 Colores</option>
+            <option value="8">8 Colores</option>
+            <option value="9">9 Colores</option>
+          </select>
+          <!-- Botón para cambiar el tipo de color hex o hsl -->
+          <label for="typeColor-btn">Tipo de color hex/hsl:</label>
+          <select id="typeColor-btn">
+            <option value="hsl">Hsl</option>
+            <option value="hex">Hex</option>
+          </select>
+          <!-- Botón principal operativo -->
+          <button id="generate-btn">Generar Paleta</button>
+        </nav>
 
-      <!-- Contenedor dinámico de colores  -->
-      <section id="palette-container" class="palette-grid"></section>
-    </main>
+        <!-- Contenedor dinámico de colores  -->
+        <section id="palette-container" class="palette-grid"></section>
+      </main>
 
-    <!-- Alert codigo al portapapeles -->
-    <div id="toast" class="hidden">¡Código copiado al portapapeles!</div>
+      <!-- Alert codigo al portapapeles -->
+      <div id="toast" class="hidden">¡Código copiado al portapapeles!</div>
 
-    <footer>
-      <p>&copy; 2025 Colorfly Studio - Proyecto Integrador Frontend Junior</p>
-    </footer>
+      <footer>
+        <p>&copy; 2025 Colorfly Studio - Proyecto Integrador Frontend Junior</p>
+      </footer>
 
-    <script src="./scripts/scripts.js"></script>
+      <script src="./scripts/scripts.js"></script>
+    </div>
   </body>
 </html>
