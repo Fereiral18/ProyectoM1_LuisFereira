@@ -15,7 +15,7 @@ function generateRandomHex() {
   return color;
 }
 
-
+//Funcion para realizar la transformacion de HEX a RGB
   function hexToRgb(hex = generateRandomHex()) {
   // Eliminar '#' si está presente
   hex = hex.replace(/^#/, '');
@@ -32,7 +32,7 @@ function generateRandomHex() {
   return {r, g, b}
 }
 
-
+// Funcion para realizar la transformacion de RGB a HSL
 function rgbToHsl(hsl= hexToRgb()) {
   // 1. Normalizar valores RGB (0-255 a 0-1)
  let r = hsl.r
@@ -67,42 +67,68 @@ function rgbToHsl(hsl= hexToRgb()) {
   };
 }
 
-// Ejemplos de uso
-// "rgb(255, 87, 51)"
 
 // Render dinámico de la paleta
+
+let colorsList = []
 function createPalette() {
   paletteContainer.innerHTML = "";
   const size = parseInt(sizeSelect.value);
-
+  colorsList = []
   for (let i = 0; i < size; i++) {
     
        const hex = generateRandomHex();
        const hsl = rgbToHsl()
-        const card = document.createElement('div');
+       const card = document.createElement('div');
+       colorsList.push({hex, hsl})
         card.className = 'color-card';
-     
+        
         card.innerHTML = `
-            <div class="color-box" style="background-color: ${typeColor.value === "hex" ? hex : `hsl(${hsl.h}, ${hsl.s}%, ${hsl.l}%)`}" title="Click para copiar"></div>
-            <p><strong>${typeColor.value === "hex" ? hex :`${hsl.h}, ${hsl.s}%, ${hsl.l}%`}</strong></p>
+        <div class="color-box" style="background-color: ${typeColor.value === "hex" ? hex : `hsl(${hsl.h}, ${hsl.s}%, ${hsl.l}%)`}" title="Click para copiar"></div>
+        <p><strong class="color-value">${typeColor.value === "hex" ? hex :`${hsl.h}, ${hsl.s}%, ${hsl.l}%`}</strong></p>
         `;
-
+        
         // Evento para copiar al portapapeles y mostrar feedback 
-        card.querySelector('.color-box').addEventListener('click', () => {
-            navigator.clipboard.writeText(hex);
+        card.querySelector('.color-box').addEventListener('click', function() {
+            const colorToCopy = typeColor.value === 'hex' ? 
+                hex : 
+                `${hsl.h}, ${hsl.s}%, ${hsl.l}%`;
+            navigator.clipboard.writeText(colorToCopy);
             showToast();
         });
        
         paletteContainer.appendChild(card);
-    }
+      }
    
-}
-
+      console.log("lista de colores:", colorsList)
+    }
+    
 function showToast() {
   toast.classList.remove("hidden");
   setTimeout(() => toast.classList.add("hidden"), 2000);
 }
 
+// Función para actualizar la visualización de los colores
+function updateColorDisplay() {
+    const cards = document.querySelectorAll('.color-card');
+    
+    cards.forEach((card, index) => {
+        const colorBox = card.querySelector('.color-box');
+        const colorValueElement = card.querySelector('.color-value');
+        const color = colorsList[index];
+        
+        if (typeColor.value === 'hex') {
+            colorValueElement.textContent = color.hex;
+            // El color de fondo no cambia, solo el texto
+        } else {
+            colorValueElement.textContent = `${color.hsl.h}, ${color.hsl.s}%, ${color.hsl.l}%`;
+            // El color de fondo no cambia, solo el texto
+        }
+    });
+}
+typeColor.addEventListener('change', updateColorDisplay);
+console.log(updateColorDisplay())
+""
 // Event Listeners
 generateBtn.addEventListener("click", createPalette);
 
