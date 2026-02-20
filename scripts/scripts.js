@@ -92,7 +92,7 @@ function createPalette() {
         card.querySelector('.color-box').addEventListener('click', function() {
             const colorToCopy = typeColor.value === 'hex' ? 
                 hex : 
-                `${hsl.h}, ${hsl.s}%, ${hsl.l}%`;
+                `hsl(${hsl.h}, ${hsl.s}%, ${hsl.l}%)`;
             navigator.clipboard.writeText(colorToCopy);
             showToast();
         });
