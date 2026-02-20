@@ -1,6 +1,7 @@
 const paletteContainer = document.getElementById("palette-container");
 const generateBtn = document.getElementById("generate-btn");
 const sizeSelect = document.getElementById("palette-size");
+const mensajeError = document.getElementById('mensaje-error');
 const toast = document.getElementById("toast");
 const typeColor = document.getElementById("typeColor-btn");
 // Función para generar color aleatorio HEX
@@ -108,6 +109,18 @@ function showToast() {
   setTimeout(() => toast.classList.add("hidden"), 2000);
 }
 
+
+sizeSelect.addEventListener('change', function() {
+    if (sizeSelect.value === "0") {
+        mensajeError.textContent = '❌ Debes seleccionar una cantidad de colores';
+        mensajeError.style.display = 'block';
+      
+    } else {
+        mensajeError.style.display = 'none';
+    
+        console.log('Cantidad seleccionada:', sizeSelect.value);
+    }
+});
 // Función para actualizar la visualización de los colores
 function updateColorDisplay() {
     const cards = document.querySelectorAll('.color-card');
