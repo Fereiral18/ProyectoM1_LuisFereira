@@ -6,7 +6,7 @@ const toast = document.getElementById("toast");
 const typeColor = document.getElementById("typeColor-btn");
 
 // Función para generar color aleatorio HEX
-
+let sizeValue = ""
 function generateRandomHex() {
   const chars = "0123456789ABCDEF";
   let color = "#";
@@ -46,7 +46,6 @@ function rgbToHsl(hsl = hexToRgb()) {
   g /= 255;
   let b = hsl.b;
   b /= 255;
-  console.log(r, g, b);
   const max = Math.max(r, g, b),
     min = Math.min(r, g, b);
   let h,
@@ -83,25 +82,14 @@ function rgbToHsl(hsl = hexToRgb()) {
 
 // Render dinámico de la paleta
 
-let colorsList = [];
 function createPalette() {
   paletteContainer.innerHTML = "";
-  const sizeValue = sizeSelect.value;
-  
-  // Validación simple y directa (sin función externa)
-  if (sizeValue == "0" || sizeValue == "") {
-    // Mostrar mensaje de error
-    mensajeError.textContent = "Debes seleccionar una cantidad de colores";
-    mensajeError.style.display = "block";
-    sizeSelect.style.borderColor = "red";
-    sizeSelect.style.backgroundColor = "#fff8f8";
+  let colorsList = [];
+ 
+  // Obtener el valor del select después de la inicialización
+  sizeValue =  sizeSelect.value
+  const size = parseInt(sizeValue);
 
-    return; // Esto detiene la ejecución de createPalette
-  }
-  mensajeError.style.display = "none";
-  sizeSelect.style.borderColor = "";
-  sizeSelect.style.backgroundColor = "";
-  const size = parseInt(sizeSelect.value);
   colorsList = [];
   for (let i = 0; i < size; i++) {
     const hex = generateRandomHex();
@@ -125,8 +113,25 @@ function createPalette() {
 
     paletteContainer.appendChild(card);
   }
+  console.log("tamaño de la paleta: ", sizeValue);
+  // Validación simple y directa (sin función externa)
+  if (sizeValue == "0") {
+    // Mostrar mensaje de error
+    mensajeError.textContent = "Debes seleccionar una cantidad de colores";
+    mensajeError.style.display = "block";
+    sizeSelect.style.borderColor = "red";
+    sizeSelect.style.backgroundColor = "#fff8f8";
 
-  console.log("lista de colores:", colorsList);
+    return; // Esto detiene la ejecución de createPalette
+  }else{
+    mensajeError.style.display = "none";
+    sizeSelect.style.borderColor = "";
+    sizeSelect.style.backgroundColor = "";
+ 
+  }
+  
+  
+
 }
 
 function showToast() {
@@ -166,5 +171,4 @@ setTimeout(() => {
   mensajeBienvenida.remove();
   document.getElementById("contenido-principal").style.display = "block";
 }, 2000);
-// Inicializar paleta al cargar
-createPalette();
+
