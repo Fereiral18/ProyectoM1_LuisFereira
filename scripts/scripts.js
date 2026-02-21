@@ -222,13 +222,3 @@ typeColor.addEventListener("change", updateColorDisplay);
 // Boton para generar la paleta de colores
 generateBtn.addEventListener("click", createPalette);
 sizeSelect.addEventListener("change", updatePaletteSize);
-const mensajeBienvenida = document.createElement("div");
-mensajeBienvenida.id = "mensaje-bienvenida";
-mensajeBienvenida.textContent = "¡Bienvenido al generador de paletas Colorfly!";
-document.body.appendChild(mensajeBienvenida);
-
-// Mostrar contenido después de 2 segundos
-setTimeout(() => {
-  mensajeBienvenida.remove();
-  document.getElementById("contenido-principal").style.display = "block";
-}, 2000);
