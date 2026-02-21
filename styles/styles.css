@@ -181,3 +181,10 @@ select:focus {
   margin-bottom: 10px;
  }
 }
+
+@media screen and (max-width: 500px) {
+  .control{
+    display: flex;
+  flex-direction: column;
+}
+}
