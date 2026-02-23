@@ -178,6 +178,9 @@ select:focus {
   .color-box{
     height: 70%;
   }
+  .color-card{
+    height: 170px;
+  }
   footer{
     display: flex;
     align-items: center;
