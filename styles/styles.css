@@ -171,6 +171,12 @@ select:focus {
   }
   .palette-grid{
     gap: 10px;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    height: 100%;
+  }
+  .color-box{
+    height: 70%;
   }
   footer{
     display: flex;
@@ -186,10 +192,7 @@ select:focus {
  
   gap: 2px;
  }
- .palette-grid{
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
- }
+ 
 }
 
 @media screen and (max-width: 500px) {
