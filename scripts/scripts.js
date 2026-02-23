@@ -123,9 +123,7 @@ function createPalette() {
   renderPalette(size);
  
 }
-const rgb = hexToRgb("#1D1FB0");
-const hsl = rgbToHsl(rgb);
-console.log(hsl)
+
 let allColorCards = [];
 function renderPalette(size) {
   // Limpiar el contenedor

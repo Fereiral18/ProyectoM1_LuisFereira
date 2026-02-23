@@ -49,27 +49,28 @@ HTML5
 
 CSS3
 
-JavaScript
+JavaScript(Vanilla)
 
 7. Descarga y Ejecución Local
 Sigue estos pasos si deseas descargar el proyecto y ejecutarlo en tu propia computadora para desarrollo o prueba.
 
-    Prerrequisitos
-        Solo necesitas un navegador web moderno (Chrome, Firefox, Edge, Safari) y un editor de código (como VS Code) si deseas modificar algo. No necesitas instalar servidores ni dependencias complejas.
+Prerrequisitos 
+
+Solo necesitas un navegador web moderno (Chrome, Firefox, Edge, Safari) y un editor de código (como VS Code) si deseas modificar algo. No necesitas instalar servidores ni dependencias complejas.
 
 7.1 Pasos para la instalación
     Abrir la terminal/consola.
 
-    Clonar el repositorio (necesitas tener Git instalado o descargar el ZIP):
+Clonar el repositorio (necesitas tener Git instalado o descargar el ZIP):
     Si estas en linux recuerda abrir tu terminal:
-    Ejecutar ls -> para ver en que carpeta te posicionas.
-    Ejecuta cd Escritorio/
-    Luego: pwd y deberias ver algo asi "/home/criss/Escritorio"
+    - Ejecutar ls -> para ver en que carpeta te posicionas.
+    - Ejecuta cd Escritorio/
+    - Luego: pwd y deberias ver algo asi "/home/criss/Escritorio"
     posterior a eso ejecuta:
 
-    git clone https://github.com/Fereiral18/ProyectoM1_LuisFereira.git
+- git clone https://github.com/Fereiral18/ProyectoM1_LuisFereira.git
 
-    Navegar a la carpeta del proyecto con los siguientes comandos:
+- Navegar a la carpeta del proyecto con los siguientes comandos:
     
     cd ProyectoM1_LuisFereira
     y ejecuta code .
@@ -77,13 +78,14 @@ Sigue estos pasos si deseas descargar el proyecto y ejecutarlo en tu propia comp
     se abrira el proyecto en tu Visual studio code(vsc)
     Abre la carpeta del proyecto en Visual Studio Code.
 
-        Instala la extensión "Live Server".
+    Instala la extensión "Live Server".
 
-        Haz clic derecho sobre el archivo index.html y selecciona "Open with Live Server". Esto abrirá la aplicación en http://localhost:5500/ y se recargará automáticamente cuando guardes cambios.
+    Haz clic derecho sobre el archivo index.html y selecciona "Open with Live Server". Esto abrirá la aplicación en http://localhost:5500/ y se recargará automáticamente cuando guardes cambios.
+
 7.1.1 Pasos para la instalacion sin Vsc 
 Clona el repositorio con las instrucciones ya dadas y simplemente navega a la carpeta y haz doble clic en el archivo index.html. Se abrirá en tu navegador predeterminado.
 
-Y ¡Pufff! estaras listo para usar la app de paletas de colores COLORFLY
+Y ¡Pufff! estaras listo para usar la app de paletas de colores COLORFLY.
 
 
 ✒️ Autor
