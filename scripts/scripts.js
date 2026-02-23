@@ -87,7 +87,6 @@ function createPalette() {
 
   // Obtener el valor del select después de la inicialización
   sizeValue = sizeSelect.value;
-  const types = typeColor.value;
 
   const size = parseInt(sizeValue);
   // Validación simple y directa (sin función externa)
@@ -106,7 +105,6 @@ function createPalette() {
   }
 
   currentPalette = []; // Reiniciar la paleta
-  console.log("Generando NUEVA paleta de colores...");
 
   // Generar 9 colores nuevos (el máximo posible)
   for (let i = 0; i < 9; i++) {
@@ -121,8 +119,8 @@ function renderPalette(size) {
   // Limpiar el contenedor
   paletteContainer.innerHTML = "";
   if (allColorCards.length === 0) {
-     if (!currentPalette || currentPalette.length === 0) {
-      console.error("No hay colores en currentPalette");
+    if (!currentPalette || currentPalette.length === 0) {
+     
       return;
     }
     // Renderizar solo los primeros 'size' elementos de currentPalette
