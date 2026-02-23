@@ -17,7 +17,7 @@ function generateRandomHex() {
   return color;
 }
 
-//Funcion para realizar la transformacion de HEX a RGB
+// Función para realizar la transformacion de HEX a RGB
 function hexToRgb(hex = generateRandomHex()) {
   // Eliminar '#' si está presente
   hex = hex.replace(/^#/, "");
@@ -37,20 +37,19 @@ function hexToRgb(hex = generateRandomHex()) {
   return { r, g, b };
 }
 
-// Funcion para realizar la transformacion de RGB a HSL
-function rgbToHsl(hsl = hexToRgb()) {
+// Función para realizar la transformacion de RGB a HSL
+function rgbToHsl(rgb) {
+ 
   // 1. Normalizar valores RGB (0-255 a 0-1)
-  let r = hsl.r;
-  r /= 255;
-  let g = hsl.g;
-  g /= 255;
-  let b = hsl.b;
-  b /= 255;
-  const max = Math.max(r, g, b),
-    min = Math.min(r, g, b);
-  let h,
-    s,
-    l = (max + min) / 2;
+  let r = rgb.r / 255;
+  let g = rgb.g / 255;
+  let b = rgb.b / 255;
+  
+  const max = Math.max(r, g, b);
+  const min = Math.min(r, g, b);
+  
+  let h, s;
+  let l = (max + min) / 2;
 
   // 2. Calcular Saturación y Matiz
   if (max === min) {
@@ -58,6 +57,7 @@ function rgbToHsl(hsl = hexToRgb()) {
   } else {
     const d = max - min;
     s = l > 0.5 ? d / (2 - max - min) : d / (max + min);
+    
     switch (max) {
       case r:
         h = (g - b) / d + (g < b ? 6 : 0);
@@ -69,15 +69,21 @@ function rgbToHsl(hsl = hexToRgb()) {
         h = (r - g) / d + 4;
         break;
     }
-    h /= 6;
+    h = h * 60; // Convertir a grados
   }
 
-  // 3. Escalar valores (h*360, s*100%, l*100%)
+  // 3. Escalar valores (h: 0-360, s: 0-100, l: 0-100)
   return {
-    h: Math.round(h * 360),
+    h: Math.round(h || 0),
     s: Math.round(s * 100),
     l: Math.round(l * 100),
   };
+};
+
+// Función de conveniencia que combina ambas
+function hexToHsl(hex) {
+  const rgb = hexToRgb(hex);
+  return rgbToHsl(rgb);
 }
 
 // Render dinámico de la paleta
@@ -105,15 +111,21 @@ function createPalette() {
   }
 
   currentPalette = []; // Reiniciar la paleta
-
   // Generar 9 colores nuevos (el máximo posible)
+
   for (let i = 0; i < 9; i++) {
-    const hex = generateRandomHex();
-    const hsl = rgbToHsl();
+    let hex = generateRandomHex();
+    let hsl = hexToHsl(hex);
+   
     currentPalette.push({ hex, hsl });
+    
   }
   renderPalette(size);
+ 
 }
+const rgb = hexToRgb("#1D1FB0");
+const hsl = rgbToHsl(rgb);
+console.log(hsl)
 let allColorCards = [];
 function renderPalette(size) {
   // Limpiar el contenedor
@@ -130,12 +142,11 @@ function renderPalette(size) {
       card.className = "color-card";
       card.className = "color-card";
       card.dataset.index = i; // Guardar el índice para referencia
-
       // Solo mostrar las que están dentro del size inicial
       card.style.display = i < size ? "block" : "none";
 
       card.innerHTML = `
-        <div class="color-box" style="background-color: ${typeColor.value === "hex" ? color.hex : `hsl(${color.hsl.h}, ${color.hsl.s}%, ${color.hsl.l}%)`}" title="Click para copiar"></div>
+        <div class="color-box" style="background-color: ${color.hex}" title="Click para copiar"></div>
         <p><strong class="color-value">${typeColor.value === "hex" ? color.hex : `hsl(${color.hsl.h}, ${color.hsl.s}%, ${color.hsl.l}%)`}</strong></p>
     `;
 
@@ -206,15 +217,10 @@ function updateColorDisplay() {
     const colorBox = card.querySelector(".color-box");
     const colorValueElement = card.querySelector(".color-value");
     const color = currentPalette[index];
-    if (typeColor.value === "hex") {
-      colorValueElement.textContent = color.hex;
-      // El color de fondo no cambia, texto hexadecimal
-    } else {
-      colorValueElement.textContent = `hsl(${color.hsl.h}, ${color.hsl.s}%, ${color.hsl.l}%)`;
-      // El color de fondo no cambia, texto HSL
+    typeColor.value === "hex" ? colorValueElement.textContent = color.hex : colorValueElement.textContent = `hsl(${color.hsl.h}, ${color.hsl.s}%, ${color.hsl.l}%)` 
+  
     }
-  });
-}
+  )}
 typeColor.addEventListener("change", updateColorDisplay);
 ("");
 // Boton para generar la paleta de colores
