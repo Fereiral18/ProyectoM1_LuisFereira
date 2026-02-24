@@ -13,36 +13,42 @@ Al abrir la aplicación, te encontrarás con:
 Área de visualización: Muestra los controles para generar las paletas los cuales son:
 Controles de entrada: [Selector de tamaño de paleta, Tipos de colores hexadecimal o hsl, botón "Generar paleta"].
 
-    - Selector de tamaño de la paleta: La cual cuenta con 3 tipos: 6, 8, 9 tamaños, selecciona la cantidad deseada.
-    - Selector de tipo de color que deseas que se genere: Hexadecimal (Hex) o Hue, Saturation, Lightness - Tono, Saturación, Luminosidad (HSL).
+    -> Selector de tamaño de la paleta: La cual cuenta con 3 tipos: 6, 8, 9 tamaños, selecciona la cantidad deseada.
 
-    Al seleccionar el tamaño y el tipo de color, le damos click al boton de generar paleta, la cual nos desplegara una lista de colores segun la cantidad seleccionada y el tipo seleccionado.
+    -> Selector de tipo de color que deseas que se genere: Hexadecimal (Hex) o Hue, Saturation, Lightness - Tono, Saturación, Luminosidad (HSL).
+
+    -> Al seleccionar el tamaño y el tipo de color, le damos click al boton de generar paleta, la cual nos desplegara una lista de colores segun la cantidad seleccionada y el tipo seleccionado.
     Al generar una paleta de colores podremos intercambiar entre que tipo deseamos ver, hexadecimal o hsl de manera dinamica, de igual manera la cantidad que deseamos que nos muestre en la interfaz de usuario ya sea 6, 8 u 9.
 
-    -Si deseas generar otros colores, dale Click al boton de "Generar paleta" Y ¡Listo! La nueva paleta aparecerá en pantalla con la cantidad de tamaño seleccionada y sus variaciones de color con el tipo seleccionado.
+    -> Si deseas generar otros colores, dale Click al boton de "Generar paleta" Y ¡Listo! La nueva paleta aparecerá en pantalla con la cantidad de tamaño seleccionada y sus variaciones de color con el tipo seleccionado.
 
-    Códigos de color: Cada color se muestra con su valor hexadecimal (Ej: #FF5733) o hsl (Ej: hsl(11, 100%, 60%) ).
+    -> Códigos de color: Cada color se muestra con su valor hexadecimal (Ej: #FF5733) o hsl (Ej: hsl(11, 100%, 60%) ).
 
 2. Interacción con los colores
+
 Copiar color: Haz clic en cualquier recuadro de color para copiar su código hexadecimal o hsl al portapapeles. Aparecerá una notificación de confirmación.
 
 3. Arquitectura y Tecnologías
-HTML5: Para la estructura semántica de la página.
 
-CSS3 (Flexbox/Grid): Para el diseño responsivo y la disposición de los elementos en pantalla, asegurando que se vea bien en móviles y ordenadores.
+-> HTML5: Para la estructura semántica de la página.
 
-JavaScript (Vanilla): Se optó por JavaScript puro (sin frameworks) para mantener el proyecto ligero, de rápido rendimiento y fácil de mantener. Además, facilita su despliegue en cualquier servidor estático.
+-> CSS3 (Flexbox/Grid): Para el diseño responsivo y la disposición de los elementos en pantalla, asegurando que se vea bien en móviles y ordenadores.
+
+-> JavaScript (Vanilla): Se optó por JavaScript puro (sin frameworks) para mantener el proyecto ligero, de rápido rendimiento y fácil de mantener. Además, facilita su despliegue en cualquier servidor estático.
+
 4. Logica de generacion de colores.
 
-Algoritmo: Al recibir un color base (en Hex o RGB), se convierte a HSL.
+-> Algoritmo: Al recibir un color base (en Hex o RGB), se convierte a HSL.
 
 5. Gestión del Estado
-El estado de la aplicación (color base, paleta actual, que modifique el estado en base al tamaño de las paletas) se maneja mediante variables globales en el script principal. La interfaz se actualiza manipulando el DOM directamente a través de eventos.
+
+-> El estado de la aplicación (color base, paleta actual, que modifique el estado en base al tamaño de las paletas) se maneja mediante variables globales en el script principal. La interfaz se actualiza manipulando el DOM directamente a través de eventos.
 
 6. Estilos y UI/UX
-Variables CSS: Se utilizaron variables CSS personalizadas para los colores de la interfaz, facilitando la creación de un tema visual coherente y la posibilidad de futuras modificaciones.
 
-Responsive Design: Se emplearon media queries para ajustar el layout en dispositivos móviles, apilando los elementos verticalmente.
+-> Variables CSS: Se utilizaron variables CSS personalizadas para los colores de la interfaz, facilitando la creación de un tema visual coherente y la posibilidad de futuras modificaciones.
+
+-> Responsive Design: Se emplearon media queries para ajustar el layout en dispositivos móviles, apilando los elementos verticalmente.
 
 🛠️ Construido con: 
 HTML5
