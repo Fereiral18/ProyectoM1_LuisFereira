@@ -38,21 +38,21 @@ Controles de entrada: [Selector de tamaño de paleta, Tipos de colores hexadecim
 
 -> JavaScript (Vanilla): Se optó por JavaScript puro (sin frameworks) para mantener el proyecto ligero, de rápido rendimiento y fácil de mantener. Además, facilita su despliegue en cualquier servidor estático.
 
-4. Logica de generacion de colores.
+1. Logica de generacion de colores.
 
 -> Algoritmo: Al recibir un color base (en Hex o RGB), se convierte a HSL.
 
-5. Gestión del Estado
+2. Gestión del Estado
 
 -> El estado de la aplicación (color base, paleta actual, que modifique el estado en base al tamaño de las paletas) se maneja mediante variables globales en el script principal. La interfaz se actualiza manipulando el DOM directamente a través de eventos.
 
-6. Estilos y UI/UX
+## 🎨 Estilos y UI/UX
 
 -> Variables CSS: Se utilizaron variables CSS personalizadas para los colores de la interfaz, facilitando la creación de un tema visual coherente y la posibilidad de futuras modificaciones.
 
 -> Responsive Design: Se emplearon media queries para ajustar el layout en dispositivos móviles, apilando los elementos verticalmente.
 
-🛠️ Construido con:
+## 🛠️ Construido con:
 
 - HTML5
 
@@ -100,7 +100,7 @@ Clonar el repositorio (necesitas tener Git instalado o descargar el ZIP):
 
     -> Haz clic derecho sobre el archivo index.html y selecciona "Open with Live Server". Esto abrirá la aplicación en http://localhost:5500/ y se recargará automáticamente cuando guardes cambios.
 
-7.1.1 Pasos para la instalacion sin Vsc 
+3. **Pasos para la instalacion sin Vsc 
 Clona el repositorio con las instrucciones ya dadas y simplemente navega a la carpeta y haz doble clic en el archivo index.html. Se abrirá en tu navegador predeterminado.
 
 Y ¡Pufff! estaras listo para usar la app de paletas de colores COLORFLY.
